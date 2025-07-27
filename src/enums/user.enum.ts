@@ -11,3 +11,8 @@ export enum Follow_Status_Enum {
    ACCEPTED = 'accepted',
    REJECTED = 'rejected',
 }
+
+export enum Block_Status_Enum {
+    BLOCKED = 'blocked',
+    UNBLOCKED = 'unblocked',
+}

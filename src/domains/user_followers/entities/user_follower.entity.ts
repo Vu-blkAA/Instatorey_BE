@@ -7,11 +7,13 @@ export class UserFollower {
     @PrimaryGeneratedColumn()
     id: number;
 
+    // This user follows another user
     @ManyToOne(() => User, user => user.following)
-    @JoinColumn({ name: 'following_user_id'})
-    following: User
+    @JoinColumn({ name: 'follower_user_id'})
+    follower: User
 
-    @ManyToOne(() => User, user => user.followed)
+    // This user is followed by another user 
+    @ManyToOne(() => User, user => user.followers)
     @JoinColumn({ name: 'followed_user_id'})
     followed: User
 

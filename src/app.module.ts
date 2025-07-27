@@ -17,6 +17,7 @@ import { ShortVideosModule } from "./domains/short_videos/short_videos.module";
 import { ShortVideoViewsModule } from "./domains/short_video_views/short_video_views.module";
 import { MediasModule } from "./domains/medias/medias.module";
 import { CommentsModule } from "./domains/comments/comments.module";
+import { UserBlocksModule } from './domains/user_blocks/user_blocks.module';
 
 @Module({
   imports: [
@@ -46,6 +47,7 @@ import { CommentsModule } from "./domains/comments/comments.module";
     HashtagsModule,
     HashtagsModule,
     BlocksModule,
+    UserBlocksModule,
   ],
   controllers: [AppController],
   providers: [AppService],
