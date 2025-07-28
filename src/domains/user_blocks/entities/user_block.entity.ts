@@ -20,9 +20,9 @@ export class UserBlock {
     @UpdateDateColumn()
     updatedAt: Date;
     
-    @ManyToOne(() => User, user => user.blocker)
+    @ManyToOne(() => User, user => user.blockBy)
     @JoinColumn({ name: 'blocker_user_id'})
-    blocker: User
+    blockBy: User
 
     @ManyToOne(() => User, user => user.blocked)
     @JoinColumn({ name: 'blocked_user_id'})

@@ -1,5 +1,7 @@
 import { Comment } from "src/domains/comments/entities/comment.entity";
+import { Conversation } from "src/domains/conversations/entities/conversation.entity";
 import { Like } from "src/domains/likes/entities/like.entity";
+import { Message } from "src/domains/messages/entities/message.entity";
 import { Notification } from "src/domains/notifications/entities/notification.entity";
 import { PostShare } from "src/domains/post_shares/entities/post_share.entity";
 import { PostView } from "src/domains/post_views/entities/post_view.entity";
@@ -67,8 +69,8 @@ export class User {
     followers: UserFollower[]
 
     // This user blocks another user
-    @OneToMany(() => UserBlock, userBlock => userBlock.blocker)
-    blocker: UserBlock[]
+    @OneToMany(() => UserBlock, userBlock => userBlock.blockBy)
+    blockBy: UserBlock[]
 
     // This user is blocked by another user
     @OneToMany(() => UserBlock, userBlock => userBlock.blocked)
@@ -101,9 +103,12 @@ export class User {
     @OneToMany(() => Notification, notification => notification.toUser)
     receivedNotifications: Notification[]
 
-    // @OneToMany(() => Conversation, conversation => conversation.startedBy)
-    // conversations: Conversation[]
+    @OneToMany(() => Conversation, conversation => conversation.startedBy)
+    startedConversations: Conversation[]
 
+    @OneToMany(() => Conversation, conversation => conversation.receivedBy)
+    receivedConversations: Conversation[]
 
-
+    @OneToMany(() => Message, message => message.user)
+    messages: Message[]
 }

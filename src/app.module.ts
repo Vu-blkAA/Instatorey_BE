@@ -9,7 +9,6 @@ import { NotificationsModule } from "./domains/notifications/notifications.modul
 import { ConversationsModule } from "./domains/conversations/conversations.module";
 import { MessagesModule } from "./domains/messages/messages.module";
 import { HashtagsModule } from "./domains/hashtags/hashtags.module";
-import { BlocksModule } from "./domains/blocks/blocks.module";
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { Module } from "@nestjs/common";  
@@ -18,6 +17,7 @@ import { ShortVideoViewsModule } from "./domains/short_video_views/short_video_v
 import { MediasModule } from "./domains/medias/medias.module";
 import { CommentsModule } from "./domains/comments/comments.module";
 import { UserBlocksModule } from './domains/user_blocks/user_blocks.module';
+import { PostHashtagsModule } from "./domains/post_hashtags/post_hashtags.module";
 
 @Module({
   imports: [
@@ -45,8 +45,7 @@ import { UserBlocksModule } from './domains/user_blocks/user_blocks.module';
     ConversationsModule,
     MessagesModule,
     HashtagsModule,
-    HashtagsModule,
-    BlocksModule,
+    PostHashtagsModule,
     UserBlocksModule,
   ],
   controllers: [AppController],

@@ -1,5 +1,6 @@
+import { Message } from "src/domains/messages/entities/message.entity";
 import { User } from "src/domains/users/entities/user.entity";
-import { CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity()
 export class Conversation {
@@ -12,11 +13,14 @@ export class Conversation {
     @UpdateDateColumn()
     updatedAt: Date;
 
-    // @ManyToOne(() => User, user => user.conversations)
-    // @JoinColumn({ name: 'user_1_id'})
-    // startedBy: User
+    @OneToMany(() => Message, message => message.conversation)
+    messages: Message[]
 
-    // @ManyToOne(() => User, user => user.conversations)
-    // @JoinColumn({ name: 'user_2_id'})
-    // receivedBy: User
+    @ManyToOne(() => User, user => user.startedConversations)
+    @JoinColumn({ name: 'start_user_id'})
+    startedBy: User
+
+    @ManyToOne(() => User, user => user.receivedConversations)
+    @JoinColumn({ name: 'received_user_id'})
+    receivedBy: User
 }
