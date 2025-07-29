@@ -11,9 +11,10 @@ import { ShortVideo } from "src/domains/short_videos/entities/short_video.entity
 import { UserBlock } from "src/domains/user_blocks/entities/user_block.entity";
 import { UserFollower } from "src/domains/user_followers/entities/user_follower.entity";
 import { Gender_Enum } from "src/enums/user.enum";
+import { TABLE_NAME } from "src/constants/table_name";
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
-@Entity()
+@Entity(TABLE_NAME.USER)
 export class User {
     @PrimaryGeneratedColumn()
     id: number;

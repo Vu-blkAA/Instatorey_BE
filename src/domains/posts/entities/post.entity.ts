@@ -6,8 +6,9 @@ import { PostShare } from "src/domains/post_shares/entities/post_share.entity";
 import { PostView } from "src/domains/post_views/entities/post_view.entity";
 import { User } from "src/domains/users/entities/user.entity";
 import { Post_Enum, Post_Visibility_Enum } from "src/enums/post.enum";
+import { TABLE_NAME } from "src/constants/table_name";
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-@Entity()
+@Entity(TABLE_NAME.POST)
 export class Post {
     @PrimaryGeneratedColumn()
     id: number

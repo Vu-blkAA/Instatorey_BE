@@ -18,18 +18,18 @@ import { MediasModule } from "./domains/medias/medias.module";
 import { CommentsModule } from "./domains/comments/comments.module";
 import { UserBlocksModule } from './domains/user_blocks/user_blocks.module';
 import { PostHashtagsModule } from "./domains/post_hashtags/post_hashtags.module";
+import { ConfigModule, ConfigService } from "@nestjs/config";
+import typeorm from "./config/typeorm";
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'postgres',
-      password: '1235',
-      database: 'postgres',
-      synchronize: true,
-      autoLoadEntities: true,
+    ConfigModule.forRoot({
+      isGlobal: true,
+      load: [typeorm],
+    }),
+    TypeOrmModule.forRootAsync({
+     inject: [ConfigService],
+     useFactory: async (configService: ConfigService) => configService.get('typeorm')!,
     }),
     UsersModule,
     PostsModule,

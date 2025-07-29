@@ -1,0 +1,18 @@
+export const TABLE_NAME = {
+  USER: 'users',
+  POST: 'posts',
+  COMMENT: 'comments',
+  LIKE: 'likes',
+  MEDIA: 'medias',
+  CONVERSATION: 'conversations',
+  HASHTAG: 'hashtags',
+  MESSAGE: 'messages',
+  NOTIFICATION: 'notifications',
+  POST_HASHTAG: 'post_hashtags',
+  POST_SHARE: 'post_shares',
+  POST_VIEW: 'post_views',
+  SHORT_VIDEO: 'short_videos',
+  SHORT_VIDEO_VIEW: 'short_video_views',
+  USER_BLOCK: 'user_blocks',
+  USER_FOLLOWER: 'user_followers',
+};

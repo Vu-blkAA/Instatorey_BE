@@ -1,8 +1,9 @@
 import { User } from "src/domains/users/entities/user.entity";
 import { Block_Status_Enum } from "src/enums/user.enum";
+import { TABLE_NAME } from "src/constants/table_name";
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
-@Entity()
+@Entity(TABLE_NAME.USER_BLOCK)
 export class UserBlock {
     @PrimaryGeneratedColumn()
     id: number;

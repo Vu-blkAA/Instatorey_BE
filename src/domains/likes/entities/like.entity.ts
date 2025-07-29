@@ -1,9 +1,10 @@
 import { Post } from "src/domains/posts/entities/post.entity";
 import { User } from "src/domains/users/entities/user.entity";
 import { Comment } from "src/domains/comments/entities/comment.entity";
+import { TABLE_NAME } from "src/constants/table_name";
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
-@Entity()
+@Entity(TABLE_NAME.LIKE)
 export class Like {
     @PrimaryGeneratedColumn()
     id: number;

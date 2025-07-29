@@ -1,9 +1,10 @@
 import { Conversation } from "src/domains/conversations/entities/conversation.entity";
 import { Media } from "src/domains/medias/entities/media.entity";
 import { User } from "src/domains/users/entities/user.entity";
+import { TABLE_NAME } from "src/constants/table_name";
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
-@Entity()
+@Entity(TABLE_NAME.MESSAGE)
 export class Message {
     @PrimaryGeneratedColumn()
     id: number;
@@ -29,5 +30,5 @@ export class Message {
     @OneToOne(() => Media, media => media.messages, {nullable: true, cascade: true})
     @JoinColumn({ name: 'media_id'})
     media: Media;
-    
+
 }

@@ -3,8 +3,9 @@ import { Column, Entity } from "typeorm";
 import { User } from "src/domains/users/entities/user.entity";
 import { CreateDateColumn, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { ShortVideo } from "src/domains/short_videos/entities/short_video.entity";
+import { TABLE_NAME } from "src/constants/table_name";
 
-@Entity()
+@Entity(TABLE_NAME.SHORT_VIDEO_VIEW)
 export class ShortVideoView {
     @PrimaryGeneratedColumn()
     id: number;

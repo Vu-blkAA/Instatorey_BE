@@ -1,8 +1,9 @@
 import { User } from "src/domains/users/entities/user.entity";
 import { Notification_Enum, Notification_Object_Type_Enum } from "src/enums/notification.enum";
+import { TABLE_NAME } from "src/constants/table_name";
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
-@Entity()
+@Entity(TABLE_NAME.NOTIFICATION)
 export class Notification {
     @PrimaryGeneratedColumn()
     id: number;

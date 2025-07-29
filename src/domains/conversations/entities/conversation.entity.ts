@@ -1,8 +1,9 @@
 import { Message } from "src/domains/messages/entities/message.entity";
 import { User } from "src/domains/users/entities/user.entity";
+import { TABLE_NAME } from "src/constants/table_name";
 import { CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
-@Entity()
+@Entity(TABLE_NAME.CONVERSATION)
 export class Conversation {
     @PrimaryGeneratedColumn()
     id: number;
