@@ -11,3 +11,8 @@ export enum Post_Visibility_Enum {
     FRIEND_ONLY = 'friend_only',
 }
 
+
+export enum Post_Status_Enum {
+    ENABLED = 'enabled',
+    DISABLED = 'disabled',
+}
