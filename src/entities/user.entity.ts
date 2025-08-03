@@ -1,19 +1,21 @@
-import { Gender_Enum } from "src/enums/user.enum";
 import { TABLE_NAME } from "src/constants/table_name";
-import { Column, Entity, OneToMany } from "typeorm";
+import { Gender_Enum } from "src/enums/user.enum";
+import { BeforeInsert, Column, Entity, JoinColumn, OneToMany, OneToOne } from "typeorm";
 import { BaseEntity } from "./base.entity";
-import { UserFollower } from "./user_follower.entity";
-import { UserBlock } from "./user_block.entity";
-import { Post } from "./post.entity";
-import { Like } from "./like.entity";
 import { Comment } from "./comment.entity";
-import { PostView } from "./post_view.entity";
+import { Conversation } from "./conversation.entity";
+import { Like } from "./like.entity";
+import { Media } from "./media.entity";
+import { Message } from "./message.entity";
+import { Notification } from "./notification.entity";
+import { Post } from "./post.entity";
 import { PostShare } from "./post_share.entity";
+import { PostView } from "./post_view.entity";
 import { ShortVideo } from "./short_video.entity";
 import { ShortVideoView } from "./short_video_view.entity";
-import { Notification } from "./notification.entity";
-import { Conversation } from "./conversation.entity";
-import { Message } from "./message.entity";
+import { UserBlock } from "./user_block.entity";
+import { UserFollower } from "./user_follower.entity";
+import * as bcrypt from 'bcrypt';
 
 @Entity(TABLE_NAME.USER)
 export class User extends BaseEntity {
@@ -23,10 +25,7 @@ export class User extends BaseEntity {
     @Column()
     lastName: string;
 
-    @Column()
-    avatarUrl: string;
-
-    @Column()
+    @Column({type: 'date', nullable: true, default: null})
     dob: Date;
 
     @Column()
@@ -35,23 +34,27 @@ export class User extends BaseEntity {
     @Column()
     email: string;
 
-    @Column()
+    @Column({type: 'enum', enum: Gender_Enum, nullable: true, default: null})
     gender: Gender_Enum
 
-    @Column()
+    @Column({nullable: true, default: null})
     bio: string;
 
     @Column()
     username: string;
 
-    @Column()
-    password: string;
+    @Column({ select: false })
+    password: string; // how to hash password
 
-    @Column({default: true})
+    @Column({default: true, nullable: true})
     isActive: boolean;
 
-    @Column({nullable: true})
+    @Column({nullable: true, type: 'timestamptz'})
     lastActiveAt: Date;
+
+    @OneToOne(() => Media, media => media.user, {nullable: true})
+    @JoinColumn({ name: 'avatar_id'})
+    avatar: Media
 
     // This user follows another user
     @OneToMany(() => UserFollower, userFollower => userFollower.follower)
@@ -104,4 +107,14 @@ export class User extends BaseEntity {
 
     @OneToMany(() => Message, message => message.user)
     messages: Message[]
+
+    @BeforeInsert()
+    async hashPassword() {
+        this.password = await bcrypt.hash(this.password, 10);
+    }
+
+    async comparePassword(password: string) {
+        return await bcrypt.compare(this.password, password);
+    }
+    
 } 

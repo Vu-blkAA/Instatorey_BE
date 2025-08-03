@@ -19,7 +19,7 @@ export class AWSS3Service {
         this.bucketName = this.configService.get('AWS_BUCKET_NAME');
         this.accessKeyId = this.configService.get('AWS_ACCESS_KEY_ID');
         this.secretAccesKey = this.configService.get('AWS_SECRET_ACCESS_KEY');
-        this.temporaryAssetsPath = this.configService.get('AWS_TEMPORARY_BUCKET_NAME');
+        this.temporaryAssetsPath = this.configService.get('AWS_ASSETS_TEMPORARY_BUCKET');
 
         this.s3Client = new S3Client({
             region: this.region,
