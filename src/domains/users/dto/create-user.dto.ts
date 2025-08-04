@@ -1,4 +1,4 @@
-import { IsDate, IsDateString, IsEmail, IsEnum, IsNotEmpty, IsOptional, IsString, MinLength } from "class-validator";
+import { IsDateString, IsEmail, IsEnum, IsNotEmpty, IsOptional, IsString, MinLength } from "class-validator";
 import { Gender_Enum } from "src/enums/user.enum";
 
 export class CreateUserDto {

@@ -15,7 +15,7 @@ export class Post extends BaseEntity {
     @Column({ type: 'enum', enum: Post_Enum, default: Post_Enum.IMAGE})
     type: Post_Enum
 
-    @Column({ nullable: true})
+    @Column({ nullable: true })
     caption: string;
 
     @Column({ type: 'enum', enum: Post_Visibility_Enum, default: Post_Visibility_Enum.PUBLIC})
@@ -24,7 +24,7 @@ export class Post extends BaseEntity {
     @Column({ type: 'enum', enum: Post_Status_Enum, default: Post_Status_Enum.ENABLED })
     status: Post_Status_Enum;
 
-    @Column()
+    @Column({ nullable: true })
     deletedAt: Date;
 
     @ManyToOne(() => User, user => user.posts)

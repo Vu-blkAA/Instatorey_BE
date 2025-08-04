@@ -116,5 +116,4 @@ export class User extends BaseEntity {
     async comparePassword(password: string) {
         return await bcrypt.compare(this.password, password);
     }
-    
 } 

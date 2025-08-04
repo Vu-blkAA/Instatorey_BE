@@ -9,6 +9,6 @@ import { MediasModule } from '../medias/medias.module';
   imports: [TypeOrmModule.forFeature([User]), MediasModule],
   controllers: [UsersController],
   providers: [UsersService],
-  exports: [UsersService]
+  exports: [UsersService, TypeOrmModule]
 })
 export class UsersModule {}
