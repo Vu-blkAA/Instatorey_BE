@@ -1,4 +1,6 @@
 import { IsDateString, IsEmail, IsEnum, IsNotEmpty, IsOptional, IsString, MinLength } from "class-validator";
+import { IsUnique } from "src/common/validations/is-unique-constraint";
+import { Role } from "src/constants/role.enum";
 import { Gender_Enum } from "src/enums/user.enum";
 
 export class CreateUserDto {
@@ -12,15 +14,17 @@ export class CreateUserDto {
 
     @IsString()
     @IsNotEmpty()
-    @IsDateString({ strict: true})
+    @IsDateString({ strict: true })
     dob: string;
 
     @IsString()
     @IsNotEmpty()
+    @IsUnique({ tableName: 'users', columnName: 'phoneNumber'})
     phoneNumber: string;
 
     @IsEmail()
     @IsNotEmpty()
+    @IsUnique({ tableName: 'users', columnName: 'email'})
     email: string;
 
     @IsEnum(Gender_Enum)
@@ -33,6 +37,7 @@ export class CreateUserDto {
 
     @IsString()
     @IsNotEmpty()
+    @IsUnique({ tableName: 'users', columnName: 'username'})
     username: string;
 
     @IsString()
@@ -43,4 +48,8 @@ export class CreateUserDto {
     @IsOptional()
     @IsString()
     avatarUrl: string;
+
+    @IsEnum(Role)
+    @IsOptional()
+    role: Role;
 }

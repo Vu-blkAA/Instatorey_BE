@@ -1,6 +1,6 @@
 import { DeleteObjectCommand, GetObjectCommand, PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
-import { Injectable, Logger } from "@nestjs/common";
+import { BadRequestException, Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 
 
@@ -69,7 +69,12 @@ export class AWSS3Service {
     // }
 
     async getPresignedUrl(file: Express.Multer.File): Promise<{path: string, uploadUrl: string}> {
-        const {originalname, mimetype} = file;
+
+        if(!file) {
+            throw new BadRequestException('File is required');
+        }
+
+        const {originalname, mimetype} = file || {};
         const temporaryAssetsPath = this.temporaryAssetsPath;
 
         const path = `${temporaryAssetsPath}/${Date.now()}-${originalname}`;

@@ -4,6 +4,8 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import typeorm from "./config/typeorm";
+import { CoreModule } from "./core/core.module";
+import { AuthModule } from './domains/auth/auth.module';
 import { CommentsModule } from "./domains/comments/comments.module";
 import { ConversationsModule } from "./domains/conversations/conversations.module";
 import { FilesModule } from "./domains/files/files.module";
@@ -21,8 +23,7 @@ import { ShortVideosModule } from "./domains/short_videos/short_videos.module";
 import { UserBlocksModule } from './domains/user_blocks/user_blocks.module';
 import { UserFollowersModule } from "./domains/user_followers/user_followers.module";
 import { UsersModule } from "./domains/users/users.module";
-import { CoreModule } from "./core/core.module";
-
+import { IsUniqueConstraint } from "./common/validations/is-unique-constraint";
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -52,8 +53,12 @@ import { CoreModule } from "./core/core.module";
     PostHashtagsModule,
     UserBlocksModule,
     FilesModule,
+    AuthModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService, 
+    IsUniqueConstraint
+],
 })
 export class AppModule {}

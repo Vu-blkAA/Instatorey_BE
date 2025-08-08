@@ -10,14 +10,13 @@ export class HttpExceptionFilter implements ExceptionFilter {
         const status = exception.getStatus();
 
         const { message } = exception.getResponse() as any || 'Internal server error';
-        const returnMessage = typeof message === 'string' ? [message] : message;
 
         response
             .status(status)
             .json({
                 statusCode: status,
                 timestamp: new Date().toISOString(),
-                message: returnMessage,
+                message,
             })
    }
 }

@@ -15,4 +15,5 @@ export const TABLE_NAME = {
   SHORT_VIDEO_VIEW: 'short_video_views',
   USER_BLOCK: 'user_blocks',
   USER_FOLLOWER: 'user_followers',
+  REFRESH_TOKEN: 'refresh_tokens',
 };
