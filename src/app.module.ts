@@ -24,6 +24,11 @@ import { UserBlocksModule } from './domains/user_blocks/user_blocks.module';
 import { UserFollowersModule } from "./domains/user_followers/user_followers.module";
 import { UsersModule } from "./domains/users/users.module";
 import { IsUniqueConstraint } from "./common/validations/is-unique-constraint";
+import { ThrottlerGuard, ThrottlerModule } from "@nestjs/throttler";
+import { APP_GUARD } from "@nestjs/core";
+import { CustomThrottlerGuard } from "./common/throttler/custom-throttler";
+import { ScheduleModule } from "@nestjs/schedule";
+import { RefreshTokenModule } from './domains/refresh_token/refresh_token.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -34,6 +39,15 @@ import { IsUniqueConstraint } from "./common/validations/is-unique-constraint";
     TypeOrmModule.forRootAsync({
      inject: [ConfigService],
      useFactory: async (configService: ConfigService) => configService.get('typeorm')!,
+    }),
+    ScheduleModule.forRoot(),
+    ThrottlerModule.forRoot({
+      throttlers: [
+        {
+          ttl: 60000,
+          limit: 20
+        }
+      ]
     }),
     CoreModule,
     UsersModule,
@@ -54,11 +68,17 @@ import { IsUniqueConstraint } from "./common/validations/is-unique-constraint";
     UserBlocksModule,
     FilesModule,
     AuthModule,
+    RefreshTokenModule,
   ],
   controllers: [AppController],
   providers: [
     AppService, 
-    IsUniqueConstraint
+    IsUniqueConstraint,
+    {
+      provide: APP_GUARD,
+      useClass: CustomThrottlerGuard
+
+    }
 ],
 })
 export class AppModule {}

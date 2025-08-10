@@ -69,6 +69,9 @@ export class AuthService {
       { expiresIn: ACCESS_TOKEN_CONSTANT.REFRESH_TOKEN_EXPIRE_SECONDS }
     );
 
+    // Revoke all refresh tokens of user
+    await this.refreshTokenRepository.update({ user }, { revoked: true })
+
     await this.refreshTokenRepository.save({
       refreshToken,
       user,
@@ -106,10 +109,6 @@ export class AuthService {
       isActive: user.isActive,
       role: user.role
     };
-
-    await this.refreshTokenRepository.update({ refreshToken }, {
-      revoked: true,
-    })
 
     return {
       accessToken: await this.jwtService.signAsync(payload, { expiresIn: ACCESS_TOKEN_CONSTANT.EXPIRE_SECONDS }),
